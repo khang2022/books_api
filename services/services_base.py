@@ -26,8 +26,7 @@ class BaseService(Generic[ModelType]):  # get all "any" record from database
         for k in dict(obj):
             setattr(translate, k, getattr(obj, k, ""))        
         session.add(translate)
-        # session.commit()
-        # session.refresh(translate)
+        
         return translate
     
     def save(self, session: Session, obj: ModelType):
