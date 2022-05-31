@@ -1,8 +1,8 @@
 from datetime import date
 from pydantic import BaseModel
-from .f_category import CategoryCreate,CategoryUpdate
-#1
-#1
+from .f_category import CategoryBase
+
+
 class BookBase (BaseModel):
 
     book_name: str | None
@@ -16,11 +16,11 @@ class BookBase (BaseModel):
         orm_mode = True
 
 
-class BookCreate (BookBase, CategoryCreate):
+class BookCreate (BookBase, CategoryBase):
     pass
 
 
-class BookUpdate (BookBase, CategoryUpdate):
+class BookUpdate (BookBase, CategoryBase):
     pass
 
 

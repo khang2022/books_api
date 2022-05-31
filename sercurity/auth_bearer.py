@@ -32,10 +32,9 @@ class JWTBearer(HTTPBearer):
         if payload:
             for position in self.role_list:  # check role with roles were given
                 if payload["role"] == position:
-                      isTokenValid = True
-                    # id = payload["id"]
-                      break
+                    isTokenValid = True
+                  # id = payload["id"]
+                    break
 
         return isTokenValid
         # return payload
-#1

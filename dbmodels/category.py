@@ -2,7 +2,7 @@ from turtle import title
 from sqlalchemy import Integer, Boolean, Column, ForeignKey, String
 from sqlalchemy.orm import relationship
 from core.base import Base
-#1
+
 
 class Categorys(Base):
     __tablename__ = "categorys"

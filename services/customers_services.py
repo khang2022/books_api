@@ -41,6 +41,7 @@ class CustomersService(BaseService):
             customers_list.append(customerinfor)    
         return customers_list
     
+    
     def get_customer(self,session: Session,id: int):
        customer_instance =  self.get_one(session,id)
        user_instance =  users_services.get_one(session, customer_instance.users_id)
@@ -62,8 +63,7 @@ class CustomersService(BaseService):
         if account:
             raise HTTPException(status_code= 403,  detail="This account created already !")
         
-        
-        # saving to user table
+   
         user_from =  UserCreate(
                 email       = body_form.email,
                 password    = body_form.password,
@@ -74,13 +74,11 @@ class CustomersService(BaseService):
             )
         user_instance = users_services.create_one2(session, user_from)
         
-        # saving to customer table
+     
         customer_form = CustomerCreate(users_id = user_instance.id)
         customer_instance = self.create_one(session, customer_form)
-        
-        # response_model read from db 
+   
         return self.get_customer(session,customer_instance.id)
-
 
 
     def modify_customer(self,session: Session, id : int ,body_form : CustomerUpdate ):
@@ -90,8 +88,8 @@ class CustomersService(BaseService):
             raise HTTPException(status_code= 403,  detail="This account is not available !")
         
         
-       customer_check = self.get_one(session,id)  # read users_id
-        # update to user table   
+       customer_check = self.get_one(session,id) 
+      
        user_from =  UserUpdate(
                 email       = body_form.email,
                 password    = body_form.password,
@@ -101,21 +99,18 @@ class CustomersService(BaseService):
                 address     = body_form.address
             )
         
-       users_services.update(session,customer_check.users_id, user_from) #  write data to users table
-            
-        # response_model 
-     # response_model read from db 
+       users_services.update(session,customer_check.users_id, user_from)
+
        return self.get_customer(session,id)
    
-
+   
     def remove_customer( self,session: Session,id: int):
-        customer_instance =  self.get_one(session,id) # read next id
-        self.delete_one(session,id) # delete customer id 
-        print(customer_instance.__dict__)
-        print(customer_instance.users_id)
-        users_services.delete_one(session,customer_instance.users_id) # delete user
+        customer_instance =  self.get_one(session,id) 
+        self.delete_one(session,id) 
+   
+        users_services.delete_one(session,customer_instance.users_id) 
         session.close()
+
 
 customers_services = CustomersService(Customers) 
 
-#1

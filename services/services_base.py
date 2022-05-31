@@ -56,7 +56,7 @@ class BaseService(Generic[ModelType]):  # get all "any" record from database
     #         session.refresh(translate)
     #     return translate
 
-#1
+
     def update(self, session: Session, id: int, data: any):
         instance = session.query(self.model).filter(self.model.id == id).first()
 

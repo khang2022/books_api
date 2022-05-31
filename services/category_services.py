@@ -7,4 +7,3 @@ class CategorysService(BaseService[Categorys]):
 
 categorys_services = CategorysService(Categorys) 
 
-#1

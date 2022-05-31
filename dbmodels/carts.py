@@ -16,7 +16,7 @@ class Carts(Base):
         "Books",
         secondary = BookCartTable,
         back_populates = "carts_list",
-        cascade="all, delete")
+        cascade="all, delete,  single_parent=True")
     
     
     customer =  relationship("Customers", back_populates="cart_list")  # link many to one cart to customer

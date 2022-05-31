@@ -8,4 +8,3 @@ BookCartTable = Table(
     Column("books_id", ForeignKey("books.id"), primary_key=True),
     Column("carts_id", ForeignKey("carts.id"), primary_key=True)    
 )
-#1

@@ -4,9 +4,9 @@ from services import customers_services
 from sqlalchemy.orm import Session
 from core.engine import create_session
 from schemas import CustomerInfor, SignUpBase, CustomerUpdate
-from sercurity import JWTBearer,decodeJWT
+from sercurity import JWTBearer, decodeJWT
 
-#1
+
 router = APIRouter()
 
 
@@ -36,13 +36,13 @@ async def create_customer(body_form: SignUpBase, session: Session = Depends(crea
 
 @router.put("/{id}", tags=["customer"], response_model=CustomerInfor)
 async def update_customer(id: int, body_form: CustomerUpdate, session: Session = Depends(create_session),
-                         credentials: str = Depends(
-                         JWTBearer(["admin", "manager", "staff"]))):
+                          credentials: str = Depends(
+        JWTBearer(["admin", "manager", "staff"]))):
     return customers_services.modify_customer(session, id, body_form)
 
 
 @router.delete("/{id}", tags=["customer"])
 async def delete_customer(id: int, session: Session = Depends(create_session),
-                         credentials: str = Depends(
-                         JWTBearer(["admin", "manager", "staff"]))):
+                          credentials: str = Depends(
+        JWTBearer(["admin", "manager", "staff"]))):
     customers_services.remove_customer(session, id)

@@ -5,3 +5,4 @@ __pycache__
 *__pycache__
 *.env
 zold_test_file
+*.md

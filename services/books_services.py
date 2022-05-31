@@ -13,8 +13,7 @@ class BooksService(BaseService[Books]):
     def get_all_books(self, session: Session):  # Get all data from a table
         result = session.query(Books).all()
         return result
-    
-    
+       
     def get_book(self, session: Session, id: int):
         result = session.query(Books).filter(Books.id == id).first()
         return result
