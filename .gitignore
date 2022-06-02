@@ -6,3 +6,4 @@ __pycache__
 *.env
 zold_test_file
 *.md
+.pytest_cache

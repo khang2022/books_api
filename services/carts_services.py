@@ -41,13 +41,24 @@ class CartsService(BaseService[Carts]):
             if not available:
                 raise HTTPException(
                     status_code=404,  detail="This cart is not exist !")
-            self.delete_one(session, id)
+            bookcart_instance = session.query(BookCartTable).filter(BookCartTable.carts_id == id).all() 
+            for bookcart in  bookcart_instance:
+               session.delete(bookcart)
+               session.commit()
+               session.close()
+            self.delete_one(session, id)       
+                
         else:
             available = session.query(Carts).filter(Carts.id == id).first()
             if not available:
                 raise HTTPException(
                     status_code=404,  detail="This cart is not exist !")
-            self.delete_one(session, id)
-
+            bookcart_instance = session.query(BookCartTable).filter(BookCartTable.carts_id == id).all() 
+            for bookcart in  bookcart_instance:
+               session.delete(bookcart)
+               session.commit()
+               session.close()
+            self.delete_one(session, id)       
+                
 
 carts_services = CartsService(Carts)

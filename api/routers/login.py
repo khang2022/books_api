@@ -10,7 +10,7 @@ from sercurity import verify_password, encodeJWT
 router = APIRouter()
 
 
-@router.post("/", tags=["user-login"])
+@router.post("/", tags=["login"])
 async def log_in(body: LoginForm, session: Session = Depends(create_session)):
     user = users_services.get_by_email(session, body.email)
     if not user:

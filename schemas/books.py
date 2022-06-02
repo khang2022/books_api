@@ -1,6 +1,6 @@
 from datetime import date
 from pydantic import BaseModel
-from .f_category import CategoryBase
+from .category import CategoryBase
 
 
 class BookBase (BaseModel):

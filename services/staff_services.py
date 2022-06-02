@@ -102,6 +102,10 @@ class StaffsService(BaseService[Staffs]):
         return self.get_staff(session, id)
 
     def delete_staff(self, id: int, session: Session):
+        available = session.query(Staffs).filter(Staffs.id == id).first()
+        if not available:
+            raise HTTPException(
+                status_code=404,  detail="this staff is not exist !")
         staff_instance = self.get_one(session, id)
         self.delete_one(session, id)
         user_instance = users_services.get_one(

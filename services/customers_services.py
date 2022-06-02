@@ -105,6 +105,10 @@ class CustomersService(BaseService):
    
    
     def remove_customer( self,session: Session,id: int):
+        available = session.query(Customers).filter(Customers.id == id).first()
+        if not available:
+            raise HTTPException(
+                status_code=404,  detail="this customer is not exist !")
         customer_instance =  self.get_one(session,id) 
         self.delete_one(session,id) 
    
